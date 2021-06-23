@@ -11,8 +11,8 @@
 #define for3(i,x,y) for(int i=(x);i>=(y);i--)
 #define for4(i,x) for(int i=head[x],y=e[i].go;i;i=e[i].next,y=e[i].go)
 using namespace std;
-int read(){
-    int x=0,f=1;char ch=getchar();
+ll read(){
+    ll x=0,f=1;char ch=getchar();
     while(ch<'0'||ch>'9'){if(ch=='-')f=-1;ch=getchar();}
     while(ch>='0'&&ch<='9'){x=10*x+ch-'0';ch=getchar();}
     return x*f;
@@ -33,8 +33,38 @@ void insert(int u,int v){
 	 e[++tot].go=u;e[tot].next=head[v];head[v]=tot;
 }
 */
-int main(){
+ll n,m,l;
+ll a[100005];
+ll tot;
 
+int main(){
+	n=read();m=read();l=read();
+	for1(i,n){
+		a[i]=read();
+		if(a[i]>l&&a[i-1]<=l)
+			tot++;
+	}
+	for1(i,m){
+		int x=read();
+		if(x==0){
+			printf("%d\n",tot);
+		}
+		else{
+			ll p=read(),q=read();
+			if(a[p]>l)
+				continue;
+			else{
+				a[p]+=q;
+				if(a[p]>l){
+					if(a[p-1]>l&&a[p+1]>l)
+						tot--;
+					else if(a[p-1]>l||a[p+1]>l)
+						continue;
+					else tot++;
+				}
+			}
+		}
+	}
 	return 0;
 }
 

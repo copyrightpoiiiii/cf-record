@@ -33,8 +33,32 @@ void insert(int u,int v){
 	 e[++tot].go=u;e[tot].next=head[v];head[v]=tot;
 }
 */
+int n,m;
+int a[1005];
+int b[1005];
 int main(){
-
+	n=read();m=read();
+	for1(i,n) 
+		a[i]=read();
+	for1(i,n)
+		b[i]=read();
+	if(a[1]==1){
+		if(a[m]==1)
+			cout<<"YES"<<endl;
+		else if(b[m]==0)
+			cout<<"NO"<<endl;
+		else{
+			int flag=1;
+			for(int j=m;j<=n;j++)
+				if(a[j]==b[j]&&a[j]==1)
+					flag=0;
+			if(!flag)
+				cout<<"YES"<<endl;
+			else cout<<"NO"<<endl;
+		}
+		
+	}
+	else cout<<"NO"<<endl;
 	return 0;
 }
 
