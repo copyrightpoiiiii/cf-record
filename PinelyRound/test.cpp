@@ -149,9 +149,68 @@ struct union_set{
         }
     }
 };
+int v[4005];
+int ind[4005];
+union_set u;
 void solve(){
-    int n;
+    int n ;
     cin>>n;
+    vector<int> edge[4005];
+    memset(ind, 0, sizeof(ind));
+    u.init(n);
+    rep(i,1,n){
+        string tmp;
+        cin>>tmp;
+        for(int j=0;j<n;j++)
+            if(tmp[j]=='1'){
+                edge[i].push_back(j+1);
+                u.merge(i,j+1);
+                ind[i]++;
+            }
+    }
+    if(u.setNum==1){
+        cout<<0<<endl;
+        return;
+    }
+    int minSize=n*2,minid=0;
+    for(int i=1;i<=n;i++){
+        int f = u.find(i);
+        if(ind[i]!=u.s[f]-1){   
+            int minind=n*3,ans=0;
+            for(int j=1;j<=n;j++)
+                if(u.find(j)==f){
+                    if(minind>ind[j]){
+                        minind = ind[j];
+                        ans=j;
+                    }
+                }
+            cout<<1<<endl<<ans<<endl;
+            return;
+        }
+        if(u.s[f]<minSize){
+            minSize= u.s[f];
+            minid = f;
+        }
+    }
+    if(minSize==1){
+        cout<<1<<endl<<minid<<endl;
+        return;
+    }
+    if(u.setNum==2){
+        cout<<minSize<<endl;
+        for(int i=1;i<=n;i++)
+            if(minid == u.find(i))
+                cout<<i<<' ';
+        cout<<endl;
+    } else{
+        cout<<2<<endl;
+        cout<<minid<<" ";
+        for(int i=1;i<=n;i++)
+            if(u.find(i)!=minid){
+                cout<<i<<endl;
+                return;
+            }
+    }
 }
 int main(){
 	ios::sync_with_stdio(false);
