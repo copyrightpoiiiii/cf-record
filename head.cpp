@@ -6,6 +6,7 @@
 #define ll long long
 #define rep(i, l, r) for (int i = (l); i <= (r); i++)
 #define per(i, r, l) for (int i = (r); i >= (l); i--)
+#define range(x, a) for(auto x:a)
 #define pr1(i,x) cout<<i<<" "<<x<<endl
 #define pr(x) cout<<x<<endl;
 #define sqr(x) ((x) * (x))
@@ -121,6 +122,33 @@ struct segment_tree
             return query_max(k << 1 | 1, x, y);
         else
             return max(query_max(k << 1, x, mid), query_max(k << 1 | 1, mid + 1, y));
+    }
+};
+struct mathAlgo {
+    bool vis[maxn];
+    int p[maxn],t;
+    vector<ll> primeFactor;
+    void prime(int n){
+        vis[1]=true;
+        t=0;
+        rep(i,2,n){
+            if(!vis[i])
+                p[++t]=i;
+            for(int j=1;j<=t&&i*p[j]<=n;j++){
+                vis[i*p[j]]=true;
+                if(i%p[j]==0)
+                    break;
+            }
+        }
+    }
+    void resolveFactor(ll x){
+        primeFactor.clear();
+        for(ll i=2;i<=sqrt(x);i++)
+            if(x%i==0){
+                primeFactor.push_back(i);
+                while(x%i==0) x/=i;
+            }
+        if(x>1)primeFactor.push_back(x);
     }
 };
 struct union_set{
