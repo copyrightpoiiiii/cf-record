@@ -39,10 +39,10 @@ long long exgcd(long long a, long long b, long long &x, long long &y)
     }
 }
 long long power(long long x,long long y){
-	long long t=1;
-	for(;y;y>>=1,x=x*x%mod)
-		if(y&1)t=t*x%mod;
-	return t;
+    long long t=1;
+    for(;y;y>>=1,x=x*x%mod)
+        if(y&1)t=t*x%mod;
+    return t;
 }
 struct segment_tree
 {
@@ -154,7 +154,7 @@ void solve(){
     cin>>n;
 }
 int main(){
-	ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(0);
     int T;
     cin>>T;
